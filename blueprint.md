@@ -30,4 +30,6 @@ O objetivo é criar uma plataforma web educativa e divertida para crianças, com
 
 - [ ] **Atualização Diária de Desenhos:** Criar uma Cloud Function para buscar e atualizar os desenhos diariamente.
 - [ ] **Agendamento:** Usar o Cloud Scheduler para executar a Cloud Function na frequência desejada.
-- [ ] **Testes e Refinamento:** Realizar testes completos, ajustar o design e otimizar a performance.
+- [x] **Testes e Refinamento: Implementação da proteção de rotas.**
+- [ ] **Testes e Refinamento: Melhoria visual e responsividade.**
+
