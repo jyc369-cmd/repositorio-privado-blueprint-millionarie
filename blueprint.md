@@ -15,16 +15,16 @@ O objetivo é criar uma plataforma web educativa e divertida para crianças, com
 
 ### Fase 2: Galeria de Desenhos e Ferramenta de Pintura
 
-- [ ] **Interface da Galeria:** Criar a página que exibirá os desenhos do dia.
-- [ ] **Ferramenta de Pintura:** Desenvolver o componente de pintura digital.
+- [x] **Interface da Galeria:** Criar a página que exibirá os desenhos do dia.
+- [x] **Ferramenta de Pintura:** Desenvolver o componente de pintura digital.
 - [ ] **Integração com Firebase Storage:** Armazenar e buscar as imagens dos desenhos.
-- [ ] **Download em PDF:** Implementar a funcionalidade de download dos desenhos.
+- [x] **Download em PDF:** Implementar a funcionalidade de download dos desenhos.
 
 ### Fase 3: Jogos Educativos
 
-- [ ] **Jogo da Memória:** Desenvolver a lógica e a interface do jogo.
-- [ ] **Jogo do Labirinto:** Criar o componente do jogo do labirinto.
-- [ ] **Página de Jogos:** Integrar os jogos em uma página dedicada.
+- [x] **Jogo da Memória:** Desenvolver a lógica e a interface do jogo.
+- [x] **Jogo do Labirinto:** Criar o componente do jogo do labirinto.
+- [x] **Página de Jogos:** Integrar os jogos em uma página dedicada.
 
 ### Fase 4: Automação e Finalização
 
