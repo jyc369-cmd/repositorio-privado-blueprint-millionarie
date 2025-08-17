@@ -19,18 +19,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
 
   useEffect(() => {
+    console.log("AuthProvider: Setting up Firebase auth listener...");
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      // Este log é o mais importante. Ele nos dirá o que o Firebase está pensando.
+      console.log("AuthProvider: onAuthStateChanged event fired. User object:", user);
       setUser(user);
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    // Limpa o listener quando o componente é desmontado
+    return () => {
+      console.log("AuthProvider: Cleaning up Firebase auth listener.");
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
-    // Se o carregamento terminou e não há usuário, redireciona para o login,
-    // a menos que já esteja na página de login.
+    // Este log nos dirá por que um redirecionamento acontece.
+    console.log(`AuthProvider: Checking redirect logic. Path: ${pathname}, Loading: ${loading}, User exists: ${!!user}`);
     if (!loading && !user && pathname !== '/login') {
+      console.log(`AuthProvider: REDIRECTING to /login because user is not authenticated.`);
       router.push('/login');
     }
   }, [user, loading, pathname, router]);
