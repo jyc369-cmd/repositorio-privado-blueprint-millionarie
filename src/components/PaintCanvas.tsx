@@ -6,9 +6,10 @@ import html2canvas from 'html2canvas';
 
 interface PaintCanvasProps {
   imageUrl: string;
+  onSave: (dataUrl: string) => void;
 }
 
-export default function PaintCanvas({ imageUrl }: PaintCanvasProps) {
+export default function PaintCanvas({ imageUrl, onSave }: PaintCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isPainting, setIsPainting] = useState(false);
   const [color, setColor] = useState('#000000');
@@ -83,6 +84,13 @@ export default function PaintCanvas({ imageUrl }: PaintCanvasProps) {
     });
   };
 
+  const handleSave = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dataUrl = canvas.toDataURL('image/png');
+    onSave(dataUrl);
+  };
+
   const colors = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
 
   return (
@@ -111,6 +119,9 @@ export default function PaintCanvas({ imageUrl }: PaintCanvasProps) {
         </div>
         <button onClick={handleDownloadPdf} style={{ padding: '0.5rem', backgroundColor: '#4CAF50', color: 'white', border: 'none', cursor: 'pointer' }}>
           Baixar em PDF
+        </button>
+        <button onClick={handleSave} style={{ padding: '0.5rem', backgroundColor: '#008CBA', color: 'white', border: 'none', cursor: 'pointer' }}>
+          Salvar
         </button>
       </div>
       <canvas

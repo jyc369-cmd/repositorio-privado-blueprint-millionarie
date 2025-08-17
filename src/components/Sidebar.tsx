@@ -44,6 +44,20 @@ export default function Sidebar() {
             </Link>
           </li>
           <li style={{ listStyle: 'none', marginBottom: '1rem' }}>
+            <Link href="/galeria" style={{
+              textDecoration: 'none',
+              color: 'var(--primary-color)',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              padding: '0.8rem',
+              display: 'block',
+              borderRadius: 'var(--border-radius)',
+              transition: 'background-color 0.2s ease, color 0.2s ease',
+            }}>
+              Minha Galeria
+            </Link>
+          </li>
+          <li style={{ listStyle: 'none', marginBottom: '1rem' }}>
             <Link href="/jogos" style={{
               textDecoration: 'none',
               color: 'var(--primary-color)',

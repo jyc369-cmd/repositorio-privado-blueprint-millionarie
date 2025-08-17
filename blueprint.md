@@ -17,13 +17,18 @@ O objetivo é criar uma plataforma web educativa e divertida para crianças, com
 
 - [x] **Interface da Galeria:** Criar a página que exibirá os desenhos do dia.
 - [x] **Ferramenta de Pintura:** Desenvolver o componente de pintura digital.
-- [ ] **Integração com Firebase Storage:** Armazenar e buscar as imagens dos desenhos.
+- [x] **Integração com Firebase Storage:** Armazenar e buscar as imagens dos desenhos.
+- [x] **Galeria Pessoal:** Criar página para o usuário ver seus desenhos salvos.
 - [x] **Download em PDF:** Implementar a funcionalidade de download dos desenhos.
 
 ### Fase 3: Jogos Educativos
 
-- [x] **Jogo da Memória:** Desenvolver a lógica e a interface do jogo.
-- [x] **Jogo do Labirinto:** Criar o componente do jogo do labirinto.
+- [x] **Jogo da Memória:** 
+    - [x] Desenvolver a lógica e a interface do jogo.
+    - [x] Adicionado temas e níveis de dificuldade.
+- [x] **Jogo do Labirinto:** 
+    - [x] Criar o componente do jogo do labirinto.
+    - [x] Adicionado múltiplos labirintos e seletor de nível.
 - [x] **Página de Jogos:** Integrar os jogos em uma página dedicada.
 
 ### Fase 4: Automação e Finalização
@@ -32,4 +37,3 @@ O objetivo é criar uma plataforma web educativa e divertida para crianças, com
 - [ ] **Agendamento:** Usar o Cloud Scheduler para executar a Cloud Function na frequência desejada.
 - [x] **Testes e Refinamento: Implementação da proteção de rotas.**
 - [ ] **Testes e Refinamento: Melhoria visual e responsividade.**
-

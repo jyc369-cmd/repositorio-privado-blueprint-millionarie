@@ -2,23 +2,31 @@
 
 import { useState, useEffect } from 'react';
 import PaintCanvas from '@/components/PaintCanvas';
-import { db } from '@/lib/firebase'; // Importando a instância do Firestore
-import { collection, getDocs } from 'firebase/firestore'; // Importando funções do Firestore
+import { db, storage } from '@/lib/firebase';
+import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { useAuth } from '@/context/AuthContext';
 
-// Definindo um tipo para os nossos desenhos
 interface Drawing {
   id: string;
   title: string;
   imageUrl: string;
 }
 
+interface SavedDrawing {
+  id: string;
+  imageUrl: string;
+  createdAt: Date;
+}
+
 export default function DesenhosPage() {
   const [selectedDrawing, setSelectedDrawing] = useState<Drawing | null>(null);
   const [drawings, setDrawings] = useState<Drawing[]>([]);
+  const [savedDrawings, setSavedDrawings] = useState<SavedDrawing[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth();
 
-  // Efeito para buscar os desenhos do Firestore quando o componente montar
   useEffect(() => {
     const fetchDrawings = async () => {
       try {
@@ -40,11 +48,35 @@ export default function DesenhosPage() {
     fetchDrawings();
   }, []);
 
+  const handleSaveDrawing = async (dataUrl: string) => {
+    if (!user) {
+      alert("Você precisa estar logado para salvar seu desenho!");
+      return;
+    }
+
+    try {
+      const storageRef = ref(storage, `saved_drawings/${user.uid}/${new Date().toISOString()}.png`);
+      await uploadString(storageRef, dataUrl, 'data_url');
+      const downloadURL = await getDownloadURL(storageRef);
+
+      const savedDrawingsCollection = collection(db, `users/${user.uid}/saved_drawings`);
+      await addDoc(savedDrawingsCollection, {
+        imageUrl: downloadURL,
+        createdAt: new Date(),
+      });
+
+      alert("Desenho salvo com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar desenho: ", error);
+      alert("Ocorreu um erro ao salvar o seu desenho.");
+    }
+  };
+
   if (selectedDrawing) {
     return (
       <div>
         <h2>Pinte o {selectedDrawing.title}</h2>
-        <PaintCanvas imageUrl={selectedDrawing.imageUrl} />
+        <PaintCanvas imageUrl={selectedDrawing.imageUrl} onSave={handleSaveDrawing} />
         <button onClick={() => setSelectedDrawing(null)} style={{ marginTop: '1rem' }}>Voltar para a galeria</button>
       </div>
     );
