@@ -30,8 +30,7 @@ export default function LoginPage() {
         await createUserWithEmailAndPassword(auth, email, password);
       }
     } catch (error: any) {
-      setError(error.message);
-      console.error(error);
+      setError("Ops! E-mail ou senha inválidos. Tente novamente.");
     }
   };
 
@@ -41,115 +40,97 @@ export default function LoginPage() {
     try {
       await signInWithPopup(auth, provider);
     } catch (error: any) {
-      setError(error.message);
-      console.error(error);
+      setError("Ocorreu um erro ao tentar logar com o Google.");
     }
   };
 
   return (
     <div style={{
       display: 'flex',
-      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
       padding: '20px',
-      backgroundColor: 'var(--background-color)',
+      backgroundImage: 'linear-gradient(to top, #f3e7f9, #d4c1ec)',
     }}>
       <div style={{
         backgroundColor: '#ffffff',
-        padding: '40px',
-        borderRadius: 'var(--border-radius)',
-        boxShadow: 'var(--shadow)',
+        padding: '50px',
+        borderRadius: '20px',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '420px',
         textAlign: 'center',
       }}>
-        <h1 style={{ color: 'var(--primary-color)', marginBottom: '1.5rem' }}>
-          {isLogin ? 'Bem-vindo(a) de volta!' : 'Crie sua conta!'}
-        </h1>
-        <form onSubmit={handleSubmit} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          marginBottom: '1.5rem',
+        <h2 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: '3rem',
+          color: 'var(--primary-color)',
+          lineHeight: 1.2,
+          marginBottom: '1rem',
         }}>
+          {isLogin ? 'Que bom te ver!' : 'Crie sua conta Mágica!'}
+        </h2>
+        <p style={{ marginBottom: '2.5rem', color: '#6c757d', fontSize: '1.1rem' }}>
+          {isLogin ? 'Vamos colorir e aprender juntos.' : 'Uma aventura de cores te espera.'}
+        </p>
+
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Seu e-mail"
             required
-            style={{
-              padding: '0.8rem',
-              borderRadius: 'var(--border-radius)',
-              border: '1px solid #ddd',
-              fontSize: '1rem',
-            }}
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Sua senha"
+            placeholder="Sua senha secreta"
             required
-            style={{
-              padding: '0.8rem',
-              borderRadius: 'var(--border-radius)',
-              border: '1px solid #ddd',
-              fontSize: '1rem',
-            }}
           />
-          {error && <p style={{ color: 'red', fontSize: '0.9rem', marginTop: '-0.5rem' }}>{error}</p>}
-          <button type="submit" style={{
-            padding: '0.8rem 1.5rem',
-            backgroundColor: 'var(--secondary-color)',
-            color: 'white',
-            border: 'none',
-            borderRadius: 'var(--border-radius)',
-            cursor: 'pointer',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            transition: 'background-color 0.3s ease, transform 0.2s ease',
-          }}>
+          {error && <p style={{ color: '#e74c3c', fontSize: '0.9rem', marginTop: '0.5rem' }}>{error}</p>}
+          <button type="submit">
             {isLogin ? 'Entrar' : 'Cadastrar'}
           </button>
         </form>
+
         <button onClick={() => setIsLogin(!isLogin)} style={{
           background: 'none',
           border: 'none',
           color: 'var(--primary-color)',
           cursor: 'pointer',
           fontSize: '0.9rem',
-          marginBottom: '1rem',
+          marginTop: '1.5rem',
+          fontWeight: '600'
         }}>
           {isLogin ? 'Não tem uma conta? Crie aqui!' : 'Já tem uma conta? Faça login!'}
         </button>
+        
         <div style={{
-          borderTop: '1px solid #eee',
-          paddingTop: '1.5rem',
-          marginTop: '1.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+          margin: '2rem 0',
         }}>
-          <button onClick={handleGoogleLogin} style={{
-            padding: '0.8rem 1.5rem',
-            backgroundColor: '#db4437', /* Google Red */
-            color: 'white',
-            border: 'none',
-            borderRadius: 'var(--border-radius)',
-            cursor: 'pointer',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem',
-            width: '100%',
-            transition: 'background-color 0.3s ease, transform 0.2s ease',
-          }}>
-            <img src="/google-icon.svg" alt="Google Icon" style={{ width: '20px', height: '20px' }} />
-            Entrar com Google
-          </button>
+          <hr style={{flex: 1, borderColor: '#e0e0e0'}} />
+          <span style={{ padding: '0 1rem', color: '#aaa' }}>OU</span>
+          <hr style={{flex: 1, borderColor: '#e0e0e0'}} />
         </div>
+
+        <button onClick={handleGoogleLogin} style={{
+          backgroundColor: '#4285F4', /* Google Blue */
+          backgroundImage: 'none',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '10px'
+        }}>
+          <img src="/google-icon.svg" alt="Google Icon" style={{ width: '20px', height: '20px', backgroundColor: 'white', borderRadius: '50%', padding: '2px' }} />
+          Entrar com Google
+        </button>
       </div>
     </div>
   );

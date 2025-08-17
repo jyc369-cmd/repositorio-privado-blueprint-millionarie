@@ -24,38 +24,51 @@ export default function Header() {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '1rem 2rem',
-      borderBottom: '2px solid var(--accent-color)',
-      backgroundColor: 'var(--primary-color)',
-      color: 'white',
-      boxShadow: 'var(--shadow)',
-      zIndex: 10,
+      padding: '1rem 2.5rem',
+      backgroundImage: 'linear-gradient(to right, #7b2cbf, #9d4edd)',
+      color: 'var(--white-color)',
+      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
+      zIndex: 100,
     }}>
       <Link href="/home" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <h1 style={{ margin: 0, fontSize: '1.8rem', fontWeight: 'bold' }}>🎨 Kids Fun Platform</h1>
+        <h1 style={{ 
+          margin: 0, 
+          fontSize: '2.2rem', 
+          fontFamily: 'var(--font-display)',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+        }}>
+          🎨 Nascente das Cores
+        </h1>
       </Link>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        {user && (
+          <span style={{ fontWeight: '600', fontSize: '1rem' }}>
+            Olá, {user.displayName || user.email}!
+          </span>
+        )}
         {user ? (
           <button onClick={handleLogout} style={{
-            padding: '0.6rem 1.2rem',
-            backgroundColor: 'var(--secondary-color)',
-            color: 'white',
-            border: 'none',
+            padding: '10px 20px',
+            backgroundColor: 'transparent',
+            color: 'var(--white-color)',
+            border: '2px solid var(--white-color)',
             borderRadius: 'var(--border-radius)',
             cursor: 'pointer',
             fontSize: '1rem',
-            transition: 'background-color 0.3s ease, transform 0.2s ease',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease',
           }}>
             Sair
           </button>
         ) : (
           <Link href="/login" style={{
-            padding: '0.6rem 1.2rem',
-            backgroundColor: 'var(--secondary-color)',
-            color: 'white',
+            padding: '10px 20px',
+            backgroundColor: 'var(--white-color)',
+            color: 'var(--primary-color)',
             textDecoration: 'none',
             borderRadius: 'var(--border-radius)',
-            transition: 'background-color 0.3s ease, transform 0.2s ease',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease',
           }}>
             Login
           </Link>
